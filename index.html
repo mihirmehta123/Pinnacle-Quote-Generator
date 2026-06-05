@@ -69,10 +69,19 @@
   }
   .items-table td {
     border: 1px solid #aaa; padding: 5px 4px; text-align: center;
-    height: 26px;
+    height: auto; min-height: 26px;
   }
   .items-table td.no-col { color: #5a2d0c; font-weight: bold; width: 40px; }
-  .items-table td.desc-col { text-align: left; width: 40%; }
+  .items-table td.desc-col { text-align: left; width: 35%; }
+  .items-table td { height: auto; min-height: 26px; }
+  .img-col { text-align: center; vertical-align: middle; padding: 4px !important; }
+  .img-btn {
+    display: none; background: #5a2d0c; color: #fff;
+    border: none; border-radius: 4px; padding: 4px 8px;
+    font-size: 10px; cursor: pointer; white-space: nowrap;
+  }
+  .img-btn:hover { background: #7a3d10; }
+  .row-img { display: none; width: 150px; height: auto; cursor: pointer; border-radius: 2px; }
   .items-table td input {
     width: 100%; border: none; outline: none; font-size: 11px;
     background: transparent; text-align: center; padding: 1px;
@@ -228,23 +237,23 @@
       <tr>
         <th style="width:40px;">NO.</th>
         <th>DESCRIPTION</th>
+        <th style="width:160px;">IMAGE</th>
         <th style="width:60px;">QTY</th>
-        <th style="width:70px;">UNIT</th>
         <th style="width:90px;">UNIT PRICE</th>
         <th style="width:90px;">TOTAL PRICE</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td class="no-col">1</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">2</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">3</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">4</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">5</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">6</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">7</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">8</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">9</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
-      <tr><td class="no-col">10</td><td class="desc-col"><input type="text" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="text" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">1</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">2</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">3</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">4</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">5</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">6</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">7</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">8</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">9</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
+      <tr><td class="no-col">10</td><td class="desc-col"><input type="text" oninput="toggleImgBtn(this)" /></td><td class="img-col"><input type="file" class="img-upload" accept="image/*" onchange="loadRowImg(this)" /><button class="img-btn" onclick="this.previousElementSibling.click()">+ Image</button><img class="row-img" alt="" /></td><td><input type="number" class="qty" min="0" step="any" oninput="recalc()" /></td><td><input type="number" class="unit-price" min="0" step="any" oninput="recalc()" /></td><td class="total-price-cell"><span class="row-total"></span></td></tr>
     </tbody>
   </table>
 
@@ -339,6 +348,38 @@ function downloadPDF() {
     pdf.save('Pinnacle_Sales_Quotation.pdf');
     btn.style.display = 'flex';
   });
+}
+
+function toggleImgBtn(descInput) {
+  var row = descInput.closest('tr');
+  var btn = row.querySelector('.img-btn');
+  var img = row.querySelector('.row-img');
+  if (descInput.value.trim()) {
+    if (img.style.display === 'none' || !img.src) btn.style.display = 'inline-block';
+  } else {
+    btn.style.display = 'none';
+    img.style.display = 'none';
+    img.src = '';
+    row.querySelector('.img-upload').value = '';
+  }
+}
+
+function loadRowImg(input) {
+  if (!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var row = input.closest('tr');
+    var img = row.querySelector('.row-img');
+    var btn = row.querySelector('.img-btn');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    img.style.width = '150px';
+    img.style.height = 'auto';
+    btn.style.display = 'none';
+    // click image to re-upload
+    img.onclick = function() { input.click(); };
+  };
+  reader.readAsDataURL(input.files[0]);
 }
 
 function autoGrow(el) {
